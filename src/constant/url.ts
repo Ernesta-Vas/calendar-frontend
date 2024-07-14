@@ -1,1 +1,2 @@
-export const API_URL = 'http://localhost:3000';
+export const API_URL = process.env.NODE_ENV === 'production' ? 'http://31.129.63.84' : 'http://localhost:8080';
+
