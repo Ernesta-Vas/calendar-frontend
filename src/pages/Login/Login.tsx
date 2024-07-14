@@ -9,7 +9,7 @@ import { useToast } from '../../context/ToastContext/ToastContext';
 import { Button } from '../../ui/Button';
 import { Input } from '../../ui/Input';
 
-import { FormContainer, Title, Error, Link, ButtonWrapper, Form } from './styles';
+import { FormContainer, Title, Error, StyledLink, ButtonWrapper, Form } from './styles';
 
 interface LoginFormInputs {
   username: string;
@@ -82,7 +82,7 @@ export const Login: React.FC = () => {
                 }}
               />
             )}
-          />
+          /> 
           {errors.password && <Error>{errors.password.message}</Error>}
         </div>
 
@@ -97,7 +97,7 @@ export const Login: React.FC = () => {
           </Button>
         </ButtonWrapper>
       </Form>
-      <Link href="./calendar-frontend/register">Нет аккаунта? Зарегистрироваться</Link>
+      <StyledLink to="/register">Нет аккаунта? Зарегистрироваться</StyledLink>
     </FormContainer>
   );
 };

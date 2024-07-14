@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
@@ -37,7 +38,7 @@ export const Error = styled.p`
   text-align: left;
 `;
 
-export const Link = styled.a`
+export const StyledLink = styled(Link)`
   color: #007bff;
   text-decoration: none;
   font-size: 14px;

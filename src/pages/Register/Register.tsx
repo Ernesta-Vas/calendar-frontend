@@ -7,7 +7,7 @@ import { authService } from '../../api/authService';
 import { Button } from '../../ui/Button';
 import { Input } from '../../ui/Input';
 
-import { FormContainer, Title, Error, Link, ButtonWrapper, Form, StrengthBar, StrengthBarContainer } from './styles';
+import { FormContainer, Title, Error, StyledLink, ButtonWrapper, Form, StrengthBar, StrengthBarContainer } from './styles';
 
 interface RegisterFormInputs {
   username: string;
@@ -145,7 +145,7 @@ export const Register: React.FC = () => {
           </Button>
         </ButtonWrapper>
       </Form>
-      <Link href="./calendar-frontend/login/">Уже есть аккаунт? Войти</Link>
+      <StyledLink to="./calendar-frontend/login">Уже есть аккаунт? Войти</StyledLink>
     </FormContainer>
   );
 };
