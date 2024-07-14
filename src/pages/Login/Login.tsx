@@ -97,7 +97,7 @@ export const Login: React.FC = () => {
           </Button>
         </ButtonWrapper>
       </Form>
-      <Link href="/calendar-frontend/register">Нет аккаунта? Зарегистрироваться</Link>
+      <Link href="/calendar-frontend/register/">Нет аккаунта? Зарегистрироваться</Link>
     </FormContainer>
   );
 };
