@@ -15,7 +15,7 @@ import {
   UserWrapper, 
   Separator, 
   MobileSelectorsButton,
-   MobileSelectorsContainer} from "./style"
+  MobileSelectorsContainer} from "./style"
 
 export const Header: React.FC = () => {
   const { state, dispatch } = useContext(AuthContext);
@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
   const handleLogout = async () => {
     await authService.logout();
     dispatch({ type: 'LOGOUT' });
-    navigate('/login');
+    navigate('./calendar-frontend/login');
   };
 
   const toggleSelectors = () => {

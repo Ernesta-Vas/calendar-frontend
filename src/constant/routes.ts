@@ -19,16 +19,16 @@ export const ROUTES: IRoutes = {
     label: 'Home',
   },
   login: {
-    urlAll: '/login',
+    urlAll: './calendar-frontend/login',
     key: '3',
   },
   register: {
-    urlAll: '/register',
+    urlAll: './calendar-frontend/register',
     key: '4',
     label: 'Register',
   },
   weekCalendar: {
-    urlAll: '/week-calendar',
+    urlAll: './calendar-frontend/week-calendar',
     key: '5',
     label: 'Week Calendar',
   },
