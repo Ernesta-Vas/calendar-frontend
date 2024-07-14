@@ -14,21 +14,21 @@ export const ROUTES: IRoutes = {
     key: '1',
   },
   app: {
-    urlAll: '/',
+    urlAll: '/calendar-frontend',
     key: '2',
     label: 'Home',
   },
   login: {
-    urlAll: './calendar-frontend/login',
+    urlAll: '/calendar-frontend/login',
     key: '3',
   },
   register: {
-    urlAll: './calendar-frontend/register',
+    urlAll: '/calendar-frontend/register',
     key: '4',
     label: 'Register',
   },
   weekCalendar: {
-    urlAll: './calendar-frontend/week-calendar',
+    urlAll: '/calendar-frontend/week-calendar',
     key: '5',
     label: 'Week Calendar',
   },

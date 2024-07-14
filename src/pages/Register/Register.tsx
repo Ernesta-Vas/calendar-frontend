@@ -145,7 +145,7 @@ export const Register: React.FC = () => {
           </Button>
         </ButtonWrapper>
       </Form>
-      <Link href="/login">Уже есть аккаунт? Войти</Link>
+      <Link href="/calendar-frontend/login">Уже есть аккаунт? Войти</Link>
     </FormContainer>
   );
 };
