@@ -1,10 +1,12 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo , useContext } from 'react';
 import { RouterProvider as Router } from 'react-router';
-import { useContext } from 'react';
-import { routesConfig } from './routesConfig';
+
+
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { useToast } from '../../context/ToastContext/ToastContext';
 import { Toast } from '../Toast/Toast';
+
+import { routesConfig } from './routesConfig';
 
 
 export const RouterProvider: FC = () => {

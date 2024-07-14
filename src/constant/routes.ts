@@ -23,12 +23,12 @@ export const ROUTES: IRoutes = {
     key: '3',
   },
   register: {
-    urlAll: '/calendar-frontend/register/',
+    urlAll: '/calendar-frontend/register',
     key: '4',
     label: 'Register',
   },
   weekCalendar: {
-    urlAll: '/calendar-frontend/week-calendar/',
+    urlAll: '/calendar-frontend/week-calendar',
     key: '5',
     label: 'Week Calendar',
   },

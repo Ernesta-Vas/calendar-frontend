@@ -36,7 +36,7 @@ export const Register: React.FC = () => {
   const onSubmit = async (data: RegisterFormInputs) => {
     try {
       await authService.register(data.username, data.password);
-      navigate('/login');
+      navigate('./calendar-frontend/login');
     } catch (error) {
       console.error('Registration failed', error);
       setError('username', { type: 'manual', message: 'Username already taken' });
@@ -145,7 +145,7 @@ export const Register: React.FC = () => {
           </Button>
         </ButtonWrapper>
       </Form>
-      <StyledLink to="./calendar-frontend/login">Уже есть аккаунт? Войти</StyledLink>
+      <StyledLink to="/calendar-frontend/login">Уже есть аккаунт? Войти</StyledLink>
     </FormContainer>
   );
 };

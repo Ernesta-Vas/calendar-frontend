@@ -1,8 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+
 import { ROUTES } from '../../constant/routes';
-import { WeekCalendar } from '../../pages/WeekCalendar/WeekCalendar';
 import { Login } from '../../pages/Login/Login';
 import { Register } from '../../pages/Register/Register';
+import { WeekCalendar } from '../../pages/WeekCalendar/WeekCalendar';
 import { Header } from '../Header/Header';
 
 export const routesConfig = (isLogged: boolean) =>

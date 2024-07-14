@@ -19,7 +19,7 @@ const App: React.FC = () => {
             />
           </Helmet>
           <GlobalStyle />
-          <RouterProvider />
+          <RouterProvider/>
         </ToastProvider>
       </DateProvider>
     </AuthProvider>
