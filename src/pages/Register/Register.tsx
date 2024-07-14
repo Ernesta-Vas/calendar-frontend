@@ -17,7 +17,7 @@ interface RegisterFormInputs {
 
 const PasswordStrengthIndicator: React.FC<{ password: string }> = ({ password }) => {
   const result = zxcvbn(password);
-  const strength = Math.min(3, result.score + 1); // Ensure the strength is between 0 and 3
+  const strength = Math.min(3, result.score + 1); 
 
   return (
     <StrengthBarContainer>

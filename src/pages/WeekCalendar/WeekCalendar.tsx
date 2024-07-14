@@ -27,7 +27,7 @@ export const WeekCalendar: React.FC = () => {
   const [weekDates, setWeekDates] = useState<Date[]>([]);
   const [todos, setTodos] = useState<{ [date: string]: TodoType[] }>({});
   const { showToast } = useToast();
-  console.log("test")
+
   useEffect(() => {
     setWeekDates(getWeekDates(selectedYear, selectedMonth, selectedWeek));
   }, [selectedYear, selectedMonth, selectedWeek]);
