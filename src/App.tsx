@@ -5,6 +5,7 @@ import { RouterProvider } from './components/AppRouting/RouterProvider';
 import { AuthProvider } from './context/AuthContext/AuthContext';
 import { DateProvider } from './context/DateContext/DateContext';
 import { ToastProvider } from './context/ToastContext/ToastContext';
+import { TodoProvider } from './context/TodoContext/TodoContext';
 import { GlobalStyle } from './GlobalStyle';
 
 const App: React.FC = () => {
@@ -12,6 +13,7 @@ const App: React.FC = () => {
     <AuthProvider>
       <DateProvider>
         <ToastProvider>
+          <TodoProvider>
           <Helmet>
             <link
               href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
@@ -20,6 +22,7 @@ const App: React.FC = () => {
           </Helmet>
           <GlobalStyle />
           <RouterProvider/>
+          </TodoProvider>
         </ToastProvider>
       </DateProvider>
     </AuthProvider>

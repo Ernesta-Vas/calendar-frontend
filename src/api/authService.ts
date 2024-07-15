@@ -16,19 +16,19 @@ export const authService = {
   },
 
   async login(username: string, password: string): Promise<AuthResponse> {
-    const response = await axiosInstance.post<AuthResponse>(`${API_URL}/auth/login`, { username, password });
+    const response = await axiosInstance.post<AuthResponse>(`/auth/login`, { username, password });
     localStorage.setItem('access_token', response.data.access_token);
     document.cookie = `refresh_token=${response.data.refresh_token}; HttpOnly; Secure`;
     return response.data;
   },
 
   async getProfile(): Promise<UserType> {
-    const response = await axiosInstance.get<UserType>(`${API_URL}/auth/profile`);
+    const response = await axiosInstance.get<UserType>(`/auth/profile`);
     return response.data;
   },
 
   async refreshToken(): Promise<string> {
-    const response = await axiosInstance.post<{ access_token: string }>(`${API_URL}/auth/refresh`, {}, { withCredentials: true } );
+    const response = await axiosInstance.post<{ access_token: string }>(`/auth/refresh`, {}, { withCredentials: true } );
     localStorage.setItem('access_token', response.data.access_token);
     return response.data.access_token;
   },

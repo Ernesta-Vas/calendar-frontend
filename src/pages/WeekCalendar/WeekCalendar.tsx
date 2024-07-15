@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import todoService from '../../api/todoService';
 import { useDateContext } from '../../context/DateContext/DateContext';
 import { useToast } from '../../context/ToastContext/ToastContext';
+import { useTodos } from '../../context/TodoContext/TodoContext';
 import { TodoType } from '../../types/Todo';
 
 import { WeekDates } from './components/WeekDates/WeekDates';
@@ -24,45 +25,13 @@ const getWeekDates = (year: number, month: number, week: number) => {
 
 export const WeekCalendar: React.FC = () => {
   const { selectedYear, selectedMonth, selectedWeek } = useDateContext();
-  const [weekDates, setWeekDates] = useState<Date[]>([]);
-  const [todos, setTodos] = useState<{ [date: string]: TodoType[] }>({});
+  const { todos, addTodo, updateTodo, deleteTodo, setTodos } = useTodos();
   const { showToast } = useToast();
+  const [weekDates, setWeekDates] = useState<Date[]>([]);
 
   useEffect(() => {
     setWeekDates(getWeekDates(selectedYear, selectedMonth, selectedWeek));
   }, [selectedYear, selectedMonth, selectedWeek]);
-
-  const addTodo = useCallback((newTodo: TodoType) => {
-    const dateString = new Date(+newTodo.todoDate).toISOString().split('T')[0];
-    setTodos((prevTodos) => ({
-      ...prevTodos,
-      [dateString]: [...(prevTodos[dateString] || []), newTodo],
-    }));
-  }, []);
-
-  const updateTodo = useCallback((updatedTodo: TodoType) => {
-    const dateString = new Date(+updatedTodo.todoDate).toISOString().split('T')[0];
-    setTodos(prevTodos => {
-      const updatedTodos = { ...prevTodos };
-      if (updatedTodos[dateString]) {
-        const index = updatedTodos[dateString].findIndex(todo => todo.id === updatedTodo.id);
-        if (index !== -1) {
-          updatedTodos[dateString][index] = updatedTodo;
-        }
-      }
-      return updatedTodos;
-    });
-  }, []);
-
-  const updateTodoDate = useCallback(async (id: number, newDate: number) => {
-    try {
-      await todoService.updateTodoDate(id, newDate);
-      showToast('Дата задачи успешно обновлена', 'success');
-    } catch (error) {
-      console.error('Ошибка при обновлении даты задачи:', error);
-      showToast('Ошибка при обновлении даты задачи', 'error');
-    }
-  }, [showToast]);
 
   const fetchTodos = useCallback(async () => {
     if (weekDates.length > 0) {
@@ -78,63 +47,61 @@ export const WeekCalendar: React.FC = () => {
         }
         todosByDate[dateString].push(todo);
       });
+      console.log(todosByDate, 'todosByDate')
       setTodos(todosByDate);
     }
-  }, [weekDates]);
+  }, [weekDates, setTodos]);
 
   useEffect(() => {
     fetchTodos();
   }, [fetchTodos]);
 
-  const deleteTodo = useCallback(async (id: number) => {
+  const updateTodoDate = useCallback(async (id: number, newDate: number) => {
     try {
-      await todoService.deleteTodo(id);
-      setTodos(prevTodos => {
-        const updatedTodos = { ...prevTodos };
-        for (const date in updatedTodos) {
-          updatedTodos[date] = updatedTodos[date].filter(todo => todo.id !== id);
-        }
-        return updatedTodos;
-      });
-      showToast('Задача успешно удалена', 'success');
+      await todoService.updateTodoDate(id, newDate);
+      showToast('Дата задачи успешно обновлена', 'success');
     } catch (error) {
-      console.error('Error deleting todo:', error);
-      showToast('Ошибка при удалении задачи', 'error');
+      console.error('Ошибка при обновлении даты задачи:', error);
+      showToast('Ошибка при обновлении даты задачи', 'error');
     }
   }, [showToast]);
 
   const onDragEnd = useCallback((result: DropResult) => {
     if (!result.destination) return;
-
+  
     const { source, destination } = result;
-
-    if (source.droppableId === destination.droppableId) {
-      const items = Array.from(todos?.[source.droppableId] || []);
-      const [reorderedItem] = items.splice(source.index, 1);
-      items.splice(destination.index, 0, reorderedItem);
-
-      setTodos((prev) => ({
-        ...prev,
-        [source.droppableId]: items,
-      }));
-    } else {
-      const sourceItems = Array.from(todos?.[source.droppableId] || []);
-      const destinationItems = Array.from(todos?.[destination.droppableId] || []);
-
-      const [movedItem] = sourceItems.splice(source.index, 1);
-      movedItem.todoDate = new Date(destination.droppableId).getTime();
-
-      destinationItems.splice(destination.index, 0, movedItem);
-
-      setTodos((prev) => ({
-        ...prev,
-        [source.droppableId]: sourceItems,
-        [destination.droppableId]: destinationItems,
-      }));
-
-      updateTodoDate(movedItem.id, movedItem.todoDate);
+  
+    // @ts-expect-error типизация drug and drop
+    setTodos((prevTodos: { [date: string]: TodoType[] }) => {
+      const updatedTodos: { [date: string]: TodoType[] } = { ...prevTodos };
+  
+      if (source.droppableId === destination.droppableId) {
+        const items = Array.from(updatedTodos[source.droppableId] || []);
+        const [reorderedItem] = items.splice(source.index, 1);
+        items.splice(destination.index, 0, reorderedItem);
+        updatedTodos[source.droppableId] = items;
+      } else {
+        const sourceItems = Array.from(updatedTodos[source.droppableId] || []);
+        const destinationItems = Array.from(updatedTodos[destination.droppableId] || []);
+  
+        const [movedItem] = sourceItems.splice(source.index, 1);
+        if (movedItem) {
+          movedItem.todoDate = new Date(destination.droppableId).getTime();
+          destinationItems.splice(destination.index, 0, movedItem);
+        }
+  
+        updatedTodos[source.droppableId] = sourceItems;
+        updatedTodos[destination.droppableId] = destinationItems;
+      }
+  
+      return updatedTodos;
+    });
+  
+    const movedItem = todos[source.droppableId]?.[source.index];
+    if (movedItem) {
+      updateTodoDate(movedItem.id, new Date(destination.droppableId).getTime());
     }
-  }, [todos, updateTodoDate]);
+  }, [todos, setTodos, updateTodoDate]);
 
   const memoizedWeekDates = useMemo(() => weekDates, [weekDates]);
   const memoizedTodos = useMemo(() => todos, [todos]);
@@ -144,12 +111,12 @@ export const WeekCalendar: React.FC = () => {
       <h2>Еженедельный Календарь</h2>
       <DragDropContext onDragEnd={onDragEnd}>
         <WeekDates 
-        weekDates={memoizedWeekDates} 
-        todos={memoizedTodos} 
-        addTodo={addTodo} 
-        updateTodo={updateTodo} 
-        deleteTodo={deleteTodo} 
-        onDragEnd={onDragEnd}
+          weekDates={memoizedWeekDates} 
+          todos={memoizedTodos} 
+          addTodo={addTodo} 
+          updateTodo={updateTodo} 
+          deleteTodo={deleteTodo} 
+          onDragEnd={onDragEnd} 
         />
       </DragDropContext>
     </CalendarContainer>
