@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 
 import { RouterProvider } from './components/AppRouting/RouterProvider';
 import { FontLoader } from './components/FontLoader/FontLoader';
