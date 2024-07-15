@@ -1,6 +1,6 @@
+import {axiosInstance} from "../../axiosInstance"
+import { API_URL } from "../constant/url";
 import { TodoType } from "../types/Todo";
-import { API_URL } from "../constant/url.ts";
-import {axiosInstance} from "../../axiosInstance.ts"
 
 
 export const todoService = {

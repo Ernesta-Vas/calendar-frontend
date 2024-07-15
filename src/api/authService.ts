@@ -1,5 +1,5 @@
-import {axiosInstance} from "../../axiosInstance.ts"
-import { API_URL } from '../constant/url.ts';
+import {axiosInstance} from "../../axiosInstance"
+import { API_URL } from '../constant/url';
 import { UserType } from '../types/User';
 
 export interface AuthResponse {

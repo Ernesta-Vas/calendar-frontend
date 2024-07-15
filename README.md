@@ -1,30 +1,99 @@
-# React + TypeScript + Vite
+Calendar Frontend Project
+Описание проекта
+Этот проект представляет собой фронтенд часть приложения календаря. Приложение предоставляет пользователям возможность создавать, редактировать, удалять и управлять задачами (туду) в контексте календаря. Оно включает в себя недельный вид, где пользователи могут видеть задачи для каждой даты недели, а также различные дополнительные функции для удобства использования.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Функциональные возможности
+Основные функции:
+Создание задач:
 
-Currently, two official plugins are available:
+Пользователи могут добавлять новые задачи для выбранной даты.
+При создании задачи указывается заголовок и описание.
+Редактирование задач:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Возможность редактирования существующих задач.
+Обновление заголовка, описания и даты задачи.
+Удаление задач:
 
-## Expanding the ESLint configuration
+Удаление выбранной задачи из календаря.
+Просмотр задач:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Просмотр всех задач на выбранную неделю.
+Задачи для каждого дня недели отображаются в соответствующих блоках.
+Перемещение задач (Drag and Drop):
 
-- Configure the top-level `parserOptions` property like this:
+Возможность перетаскивания задач между днями недели.
+Обновление даты задачи при перемещении.
+Показ всех задач:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Если задач больше, чем 3, отображается кнопка "Показать еще".
+При нажатии на эту кнопку открывается боковая панель с отображением всех задач на выбранную дату.
+Обработчики состояния:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Всплывающие уведомления (тосты) для отображения сообщений об успешных действиях или ошибках.
+Модальные окна для создания и редактирования задач.
+Контекстное использование:
+Контекст аутентификации:
+
+Управление состоянием аутентификации пользователя.
+Контекст даты:
+
+Управление текущей выбранной датой (год, месяц, неделя).
+Контекст тостов:
+
+Управление отображением уведомлений (тостов).
+Структура проекта
+src/
+components/ - Компоненты пользовательского интерфейса.
+context/ - Провайдеры и хуки для контекста.
+pages/ - Страницы приложения (например, WeekCalendar).
+types/ - Определения типов TypeScript.
+api/ - Файлы для работы с API.
+Установка и запуск
+Локальная установка
+Клонируйте репозиторий:
+
+sh
+Копировать код
+git clone <URL-репозитория>
+cd calendar-frontend
+Установите зависимости:
+
+sh
+Копировать код
+npm install
+Запустите проект:
+
+sh
+Копировать код
+npm run dev
+Запуск в Docker
+Убедитесь, что у вас установлен Docker.
+
+Создайте и запустите контейнеры:
+
+sh
+Копировать код
+docker-compose up --build
+Приложение будет доступно по адресу:
+
+arduino
+Копировать код
+http://localhost:3000
+Тестирование
+Проект использует библиотеку Jest для написания тестов.
+
+Запуск тестов
+Запустите тесты:
+sh
+Копировать код
+npm run test
+Примечания
+Убедитесь, что у вас настроен правильно .env файл для подключения к необходимым API и другим сервисам.
+В проекте используются современные технологии, такие как React, TypeScript, Styled-components и React Testing Library.
+Лицензия
+Этот проект лицензирован под лицензией MIT.
+
+Авторы
+Ваше имя
+Другие участники проекта
+Если у вас есть какие-либо вопросы или предложения, пожалуйста, свяжитесь с нами через issues на GitHub или напрямую через email.
