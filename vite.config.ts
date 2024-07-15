@@ -1,15 +1,17 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: 'calendar-frontend',
+  base: '/calendar-frontend/',
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
   },
   server: {
     host: true,
-    port: 3001
+    port: 3001 
+  },
+  preview: {
+    port: 3001 
   }
 })
